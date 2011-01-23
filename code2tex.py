@@ -111,7 +111,7 @@ def main():
 	if len(sys.argv) < 2:
 		sys.exit('''
 Usage: %s FILE [FILE2] [[FILE3] [...]]]"
-Outputs .tex file to STDOUT (redirect with \"$0 FILE.pde > FILE.tex\")"
+Outputs .tex file to STDOUT (redirect with \"$0 FILE.py > FILE.tex\")"
 Languages (for syntax highlighting) determined from file extensions."
 ''' % sys.argv[0])
 
