@@ -9,14 +9,12 @@ USAGE
 
 Its usage is fairly basic:
 
-  ./code2tex.sh [file [file ...]] > output.tex
-  pdflatex output.tex
+  ./code2tex.py [file [file ...]] > output.tex
 
-For example, if a student with user id "jsmith" submitted several java
+This will create output.tex, ready to pass to latex or pdflatex.  For example, if a student with user id "jsmith" submitted several java
 files:
 
-  ./code2tex.sh jsmith*.java > jsmith.tex
-  pdflatex jsmith.tex
+  ./code2tex.py jsmith*.java > jsmith.tex && pdflatex jsmit.tex
 
 A new PDF named jsmith.pdf would then contain the contents of all jsmith*.java
 files, nicely formatted with syntax highlighting and a separate header for
@@ -25,8 +23,8 @@ each.
 
 DEPENDENCIES
 
-Producing a PDF of the LaTeX output requires LaTeX, of course.  Code2tex
-depends on a few packages that are not always included by default in a
+Producing a PDF of the LaTeX output requires LaTeX, of course.  Code2tex's
+output depends on a few packages that are not always included by default in a
 LaTeX install; in Ubuntu, for example, you'll need to install the
 following packages (along with their automatic depencies, of course):
 
