@@ -11,8 +11,8 @@ Its usage is fairly basic:
 
   ./code2tex.py [file [file ...]] > output.tex
 
-This will create output.tex, ready to pass to latex or pdflatex.  For example, if a student with user id "jsmith" submitted several java
-files:
+This will create output.tex, ready to pass to latex or pdflatex.  For
+example, if a student with user id "jsmith" submitted several java files:
 
   ./code2tex.py jsmith*.java > jsmith.tex && pdflatex jsmit.tex
 
