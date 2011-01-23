@@ -4,10 +4,10 @@ import os
 import re
 import sys
 
-# TODO: read extensions, header from files found in sys.path
+# TODO: read extensions, header from files found in sys.path?
 
-# A subset of the lLanguages supported by the Listings latex package
-# With file extensions mapped to language names.
+# A subset of the languages supported by the Listings latex package
+# File extensions mapped to language names
 exts = {
 	"ada" : "Ada" ,
 	"adb" : "Ada" ,
@@ -109,12 +109,11 @@ def addListing(filename):
 
 def main():
 	if len(sys.argv) < 2:
-		print '''
+		sys.exit('''
 Usage: %s FILE [FILE2] [[FILE3] [...]]]"
 Outputs .tex file to STDOUT (redirect with \"$0 FILE.pde > FILE.tex\")"
 Languages (for syntax highlighting) determined from file extensions."
-''' % sys.argv[0]
-		sys.exit(1)
+''' % sys.argv[0])
 
 	files = sys.argv[1:]  # get all command line arguments
 
