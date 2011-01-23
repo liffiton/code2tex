@@ -1,0 +1,39 @@
+Code2tex was created to aid in grading programming assignments.  It takes source code and inserts it into a simple LaTeX document from which a PDF is made.  This provides a document, with clear headings for each file and syntax highlighting, that can be marked up and returned to the students.
+
+
+USAGE
+
+Its usage is fairly basic:
+
+  ./code2tex.sh [file [file ...]] > output.tex
+  pdflatex output.tex
+
+For example, if a student with user id "jsmith" submitted several java files:
+  ./code2tex.sh jsmith*.java > jsmith.tex
+  pdflatex jsmith.tex
+
+A new PDF named jsmit.pdf would then contain the contents of all jsmith*.java files, nicely formatted with syntax highlighting and a separate header for each.
+
+
+DEPENDENCIES
+
+Producing a PDF of the LaTeX output requires LaTeX, of course.  Code2tex depends on a few packages that are not always included by default in a LaTeX install; in Ubuntu, for example, you'll need to install the following packages (along with their automatic depencies, of course):
+
+  texlive-fonts-recommended
+  texlive-latex-extra
+  texlive-latex-extra-doc
+  texlive-math-extra
+  texlive-pictures-doc
+
+Install these with the following command:
+
+  sudo aptitude install texlive-fonts-recommended texlive-latex-extra texlive-latex-extra-doc texlive-math-extra texlive-pictures-doc
+
+On other systems, you will need to find the correct packages.  Look for "[latex]-extra" and "math-extra" packages.
+
+
+MARKING UP THE PDF
+
+Once you have a PDF, then various software can be used to mark it up.  I and my TAs have had success with PDF-XChange Viewer, the best free Windows software I've found for annotating PDFs.  It has a wide range of tools for creating text boxes, circling things, pointing with arrows, etc.  In Linux, Xournal may be your best option.  Please let me know if you find other applications that work well for this.
+
+
