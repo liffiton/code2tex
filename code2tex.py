@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-import os
-import re
-import sys
+import sys, re, os.path
 
 # TODO: read extensions, header from files found in sys.path?
 
@@ -63,6 +61,9 @@ exts = {
 }
 
 latexspecials = "\\{}_^#&$%~"
+specials_re = re.compile(
+	'(%s)' % '|'.join(re.escape(c) for c in latexspecials)
+	)
 
 def makeTop():
 	# print out the file header
@@ -98,11 +99,12 @@ def makeBottom():
 	print "\\end{document}"
 
 def addListing(filename):
-	filename_escaped = re.sub('(%s)' % '|'.join(re.escape(c) for c in latexspecials), r'\\\1', filename)
+	filename_escaped = re.sub(specials_re, r'\\\1', filename)
 	print "\\section*{%s}" % filename_escaped
 
 	ext = filename.split('.')[-1]
-	lang = exts.get(ext,ext)  # try the extension itself if not found in our dictionary
+	lang = exts.get(ext,ext) 
+	# uses the extension itself if not found in our dictionary
 	print "\\lstinputlisting[language=%s]{%s}" % (lang, filename)
 	print
 
