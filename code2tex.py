@@ -75,9 +75,8 @@ def makeTop():
 
 \\lstset{
 	numbers=left,                   % where to put the line-numbers
-	numberstyle=\\ttfamily,         % style used for the line-numbers
-	%numbersep=5pt,                 % how far the line-numbers are from the code
-	%backgroundcolor=\\color{white}, % choose the background color. You must add \\usepackage{color}
+	numberstyle=\\small \\ttfamily \\color[rgb]{0.4,0.4,0.4},
+				% style used for the linenumbers
 	showspaces=false,               % show spaces adding special underscores
 	showstringspaces=false,         % underline spaces within strings
 	showtabs=false,                 % show tabs within strings adding particular underscores
