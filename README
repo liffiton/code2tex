@@ -14,7 +14,7 @@ Its usage is fairly basic:
 This will create output.tex, ready to pass to latex or pdflatex.  For
 example, if a student with user id "jsmith" submitted several java files:
 
-  ./code2tex.py jsmith*.java > jsmith.tex && pdflatex jsmit.tex
+  ./code2tex.py jsmith*.java > jsmith.tex && pdflatex jsmith.tex
 
 A new PDF named jsmith.pdf would then contain the contents of all jsmith*.java
 files, nicely formatted with syntax highlighting and a separate header for
@@ -26,7 +26,7 @@ DEPENDENCIES
 Producing a PDF of the LaTeX output requires LaTeX, of course.  Code2tex's
 output depends on a few packages that are not always included by default in a
 LaTeX install; in Ubuntu, for example, you'll need to install the
-following packages (along with their automatic depencies, of course):
+following packages (along with their automatic dependencies, of course):
 
   texlive-fonts-recommended
   texlive-latex-extra
