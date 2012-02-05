@@ -110,15 +110,13 @@ def addListing(filename):
 
 def main():
 	if len(sys.argv) < 2:
-		sys.exit('''
-Usage: %s FILE [FILE2] [[FILE3] [...]]]"
-Outputs .tex file to STDOUT (redirect with \"$0 FILE.py > FILE.tex\")"
-Languages (for syntax highlighting) determined from file extensions."
-''' % sys.argv[0])
+		sys.exit('''Usage: %s FILE [FILE2] [FILE3] [...]
+ Outputs .tex file to STDOUT (redirect with \"%s FILE.py > FILE.tex\")
+ Languages (for syntax highlighting) determined from file extensions.''' % (sys.argv[0], sys.argv[0]))
 
 	files = sys.argv[1:]  # get all command line arguments
 
-	# Check existence of all files firts
+	# Check existence of all files first
 	for infile in files:
 		if not os.path.isfile(infile):
 			sys.exit("File not found: %s" % infile)
