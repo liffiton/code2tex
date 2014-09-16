@@ -60,7 +60,7 @@ exts = {
 	"tcl" : "tcl"
 }
 
-latexspecials = "\\{}_^#&$%~\""
+latexspecials = "\\{}_^#&$%~"
 specials_re = re.compile(
 	'(%s)' % '|'.join(re.escape(c) for c in latexspecials)
 	)
