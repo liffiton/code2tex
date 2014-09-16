@@ -51,13 +51,14 @@ def main():
         # Convert to PDF
         subprocess.call(["pdflatex", output_file_name])
 
+    none_indicator = ["-----None-----"]
     print
     print "CONVERTED FILES FOR NAMES"
-    for name in name_to_files.keys():
+    for name in name_to_files.keys() or none_indicator:
         print name
     print
     print "FILES NOT MATCHED"
-    for file in not_matched:
+    for file in not_matched or none_indicator:
         print file
 
 if __name__ == "__main__":
