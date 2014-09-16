@@ -35,26 +35,23 @@ def main():
             name_to_files[matches[0][0]].append(matches[0][1])
 
     for (name, files) in name_to_files.items():
-        oldStdout = sys.stdout
-        sys.stdout = out = StringIO.StringIO()
+        output_file_name = name + "_files.tex"
+        output_file = open(output_file_name, "w")
 
-        code2tex.makeTop()
+        code2tex.makeTop(output_file)
         for file in files:
             full_file_name = name + "_assignsubmission_file_" + file
             full_file_path = os.path.join(directory, full_file_name)
 
-            code2tex.addListing(full_file_path, file)
-        code2tex.makeBottom()
+            code2tex.addListing(full_file_path, file, output_file)
+        code2tex.makeBottom(output_file)
 
-        sys.stdout = oldStdout
-
-        output_file_name = name + "_files.tex"
-        with open(output_file_name, "w") as output_file:
-            output_file.write(out.getvalue())
+        output_file.close()
 
         # Convert to PDF
         subprocess.call(["pdflatex", output_file_name])
 
+    print
     print "CONVERTED FILES FOR NAMES"
     for name in name_to_files.keys():
         print name
