@@ -35,7 +35,7 @@ def main():
             name_to_files[matches[0][0]].append(matches[0][1])
 
     for (name, files) in name_to_files.items():
-        output_file_name = name + "_files.tex"
+        output_file_name = (name + "_files.tex").replace(" ", "_")
         output_file = open(output_file_name, "w")
 
         code2tex.makeTop(output_file)
