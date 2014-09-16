@@ -57,10 +57,10 @@ exts = {
 	"csh" : "csh" ,
 	"ksh" : "ksh" ,
 	"sh" : "sh" ,
-	"tcl" : "tcl" 
+	"tcl" : "tcl"
 }
 
-latexspecials = "\\{}_^#&$%~"
+latexspecials = "\\{}_^#&$%~\""
 specials_re = re.compile(
 	'(%s)' % '|'.join(re.escape(c) for c in latexspecials)
 	)
@@ -97,14 +97,18 @@ def makeTop():
 def makeBottom():
 	print "\\end{document}"
 
-def addListing(filename):
-	filename_escaped = re.sub(specials_re, r'\\\1', filename)
-	print "\\section*{%s}" % filename_escaped
+def addListing(filename, custom_heading = None):
+	heading = filename
+	if custom_heading is not None:
+		heading = custom_heading
+
+	heading_escaped = re.sub(specials_re, r'\\\1', heading)
+	print "\\section*{%s}" % heading_escaped
 
 	ext = filename.split('.')[-1]
-	lang = exts.get(ext,ext) 
+	lang = exts.get(ext,ext)
 	# uses the extension itself if not found in our dictionary
-	print "\\lstinputlisting[language=%s]{%s}" % (lang, filename)
+	print "\\lstinputlisting[language=%s]{\"%s\"}" % (lang, filename)
 	print
 
 
