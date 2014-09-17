@@ -57,7 +57,7 @@ exts = {
 	"csh" : "csh" ,
 	"ksh" : "ksh" ,
 	"sh" : "sh" ,
-	"tcl" : "tcl" 
+	"tcl" : "tcl"
 }
 
 latexspecials = "\\{}_^#&$%~"
@@ -65,9 +65,9 @@ specials_re = re.compile(
 	'(%s)' % '|'.join(re.escape(c) for c in latexspecials)
 	)
 
-def makeTop():
+def makeTop(output = sys.stdout):
 	# print out the file header
-	print '''
+	print >>output, '''
 \\documentclass{article}
 \\usepackage[hmargin=1in,vmargin=1in]{geometry}
 \\usepackage{listings}
@@ -94,18 +94,22 @@ def makeTop():
 \\begin{document}
 '''
 
-def makeBottom():
-	print "\\end{document}"
+def makeBottom(output = sys.stdout):
+	print >>output, "\\end{document}"
 
-def addListing(filename):
-	filename_escaped = re.sub(specials_re, r'\\\1', filename)
-	print "\\section*{%s}" % filename_escaped
+def addListing(filename, custom_heading = None, output = sys.stdout):
+	heading = filename
+	if custom_heading is not None:
+		heading = custom_heading
+
+	heading_escaped = re.sub(specials_re, r'\\\1', heading)
+	print >>output, "\\section*{%s}" % heading_escaped
 
 	ext = filename.split('.')[-1]
-	lang = exts.get(ext,ext) 
+	lang = exts.get(ext,ext)
 	# uses the extension itself if not found in our dictionary
-	print "\\lstinputlisting[language=%s]{%s}" % (lang, filename)
-	print
+	print >>output, "\\lstinputlisting[language=%s]{\"%s\"}" % (lang, filename)
+	print >>output
 
 
 def main():
