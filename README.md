@@ -28,9 +28,11 @@ See the `hello_worlds` folder for an example; `hello_world.tex` and
 that directory.  The syntax highlighter recognizes a wide variety of
 programming languages.
 
-To quickly convert all user submissions:
-1. Use "Download all submissions" option in Moodle and extract the zip file.
-2. run `convert_all.py <directory>` where `<directory>` is the directory with the unzipped files.
+### convert_all.py
+
+To quickly convert all user submissions downloaded from a Moodle assignment:
+ 1. Use the "Download all submissions" option in Moodle and extract the resulting zip file.
+ 2. run `convert_all.py <directory>` where `<directory>` is the directory with the unzipped files.
 
 The script will attempt to create PDFs from all the files. It parses the filenames constructed from Moodle and outputs PDFs named "First\_Last\_ID\_files.pdf".
 
