@@ -3,9 +3,9 @@
 import code2tex
 import os
 import re
-import StringIO
 import subprocess
 import sys
+
 
 def main():
     if len(sys.argv) != 2:
@@ -18,49 +18,48 @@ def main():
     if not os.path.isdir(directory):
         sys.exit("Directory not found: %s" % directory)
 
-    name_to_files = {}
+    matched = []
     not_matched = []
+
+    pattern = re.compile(r".*/(.+?_\d+)_assignsubmission_file_(.*)$")
+
     for item in os.listdir(directory):
-        if not os.path.isfile(os.path.join(directory, item)):
+        item = os.path.join(directory, item)
+        # Each student's submissions are stored in a separate directory
+        if not os.path.isdir(item):
             continue
 
-        matches = re.findall("(.+?_\d+)_assignsubmission_file_(.+)$", item)
-
-        if len(matches) == 0:
-            not_matched.append(item)
+        match = re.match(pattern, item)
+        if match:
+            matched.append((match.group(1), item))
         else:
-            if matches[0][0] not in name_to_files:
-                name_to_files[matches[0][0]] = []
+            not_matched.append(item)
 
-            name_to_files[matches[0][0]].append(matches[0][1])
-
-    for (name, files) in name_to_files.items():
+    for name, dir in matched:
         output_file_name = (name + "_files.tex").replace(" ", "_")
         output_file = open(output_file_name, "w")
 
         code2tex.makeTop(output_file)
-        for file in files:
-            full_file_name = name + "_assignsubmission_file_" + file
-            full_file_path = os.path.join(directory, full_file_name)
-
+        for file in os.listdir(dir):
+            full_file_path = os.path.join(dir, file)
             code2tex.addListing(full_file_path, file, output_file)
         code2tex.makeBottom(output_file)
 
         output_file.close()
 
         # Convert to PDF
-        subprocess.call(["pdflatex", output_file_name])
+        print("[32m{}[m".format(output_file_name))
+        subprocess.call(["pdflatex", "-interaction=batchmode", output_file_name])
 
     none_indicator = ["-----None-----"]
-    print
-    print "CONVERTED FILES FOR NAMES"
-    for name in name_to_files.keys() or none_indicator:
-        print name
-    print
-    print "FILES NOT MATCHED"
+    print()
+    print("CONVERTED FILES FOR NAMES")
+    for name, _ in matched or none_indicator:
+        print(name)
+    print()
+    print("FILES NOT MATCHED")
     for file in not_matched or none_indicator:
-        print file
+        print(file)
 
 if __name__ == "__main__":
     main()
-
