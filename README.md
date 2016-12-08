@@ -5,11 +5,10 @@ source code and inserts it into a simple LaTeX document from which a PDF can be
 made.  This provides a document with syntax highlighting and clear headings for
 each file that can be marked up and returned to the students.
 
-## Usage
+## Usage / Examples
 
-Its usage is fairly basic; simply run `code2tex.py` followed by any number of
-filenames.  It will output the LaTeX document to standard out, which may be
-redirected to a file:
+Run `code2tex.py` followed by any number of filenames.  It will output the
+LaTeX document to standard out, which may be redirected to a file:
 
     ./code2tex.py file [file [file [...]]] > output.tex
 
@@ -23,14 +22,23 @@ This would create a PDF named `jsmith.pdf` containing the contents of all
 `jsmith*.java` files, nicely formatted with syntax highlighting and a separate
 header for each.
 
-See the `hello_worlds` folder for an example; `hello_world.tex` and
+Wildcards and [brace expansion](https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html)
+can be used to quickly grab files of multiple extensions from within a folder:
+
+    ./code2tex.py codefolder/*.{html,css,js} > code.tex
+
+Or from multiple nested folders:
+
+    ./code2tex.py codefolder/*/*.{html,css,js} > code.tex
+
+See the `hello_worlds` folder for example output; `hello_world.tex` and
 `hello_world.pdf` were created from the various "Hello, World!" programs in
 that directory.  The syntax highlighter recognizes a wide variety of
 programming languages.
 
 ### convert_all.py
 
-To quickly convert all user submissions downloaded from a Moodle assignment:
+To quickly convert all user submissions downloaded from a [Moodle](https://moodle.org/) assignment:
  1. Use the "Download all submissions" option in Moodle and extract the resulting zip file.
  2. run `convert_all.py <directory>` where `<directory>` is the directory with the unzipped files.
 
