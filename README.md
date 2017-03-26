@@ -1,9 +1,17 @@
 # Code2Tex
 
-Code2tex was created to aid in grading programming assignments.  It takes
+Code2Tex was created to aid in grading programming assignments.  It takes
 source code and inserts it into a simple LaTeX document from which a PDF can be
 made.  This provides a document with syntax highlighting and clear headings for
 each file that can be marked up and returned to the students.
+
+Syntax highlighting is provided via the
+[listings](https://www.ctan.org/pkg/listings) LaTeX package.  Not all languages
+are currently supported; the list of included languages is in the [package
+documentation](http://www.texdoc.net/texmf-dist/doc/latex/listings/listings.pdf#page=13)
+(Javascript is a notable exception).  For any language that does not have
+syntax highlighting rules, the file will simply be included as monospaced black
+text.
 
 ## Usage / Examples
 
@@ -22,7 +30,8 @@ This would create a PDF named `jsmith.pdf` containing the contents of all
 `jsmith*.java` files, nicely formatted with syntax highlighting and a separate
 header for each.
 
-Wildcards and [brace expansion](https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html)
+Wildcards and [brace
+expansion](https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html)
 can be used to quickly grab files of multiple extensions from within a folder:
 
     ./code2tex.py codefolder/*.{html,css,js} > code.tex
@@ -42,7 +51,9 @@ To quickly convert all user submissions downloaded from a [Moodle](https://moodl
  1. Use the "Download all submissions" option in Moodle and extract the resulting zip file.
  2. run `convert_all.py <directory>` where `<directory>` is the directory with the unzipped files.
 
-The script will attempt to create PDFs from all the files. It parses the filenames constructed from Moodle and outputs PDFs named "First\_Last\_ID\_files.pdf".
+The script will attempt to create PDFs from all the files. It parses the
+filenames constructed from Moodle and outputs PDFs named
+"First\_Last\_ID\_files.pdf".
 
 ## Dependencies
 
