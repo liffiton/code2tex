@@ -76,6 +76,11 @@ def makeTop(output=sys.stdout):
 \\usepackage{listings}
 \\usepackage{color}
 
+% For better handling of unicode (Latin characters, anyway)
+\\IfFileExists{lmodern.sty}{\\usepackage{lmodern}}{}
+\\usepackage[T1]{fontenc}
+\\usepackage[utf8]{inputenc}
+
 \\lstset{
     numbers=left,                   % where to put the line-numbers
     numberstyle=\\small \\ttfamily \\color[rgb]{0.4,0.4,0.4},

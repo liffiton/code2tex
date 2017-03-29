@@ -20,7 +20,7 @@ LaTeX document to standard out, which may be redirected to a file:
 
     ./code2tex.py file [file [file [...]]] > output.tex
 
-This will create `output.tex`, ready to pass to `latex` or `pdflatex`.  For
+This will create `output.tex`, ready to pass to `pdflatex` or `xelatex`.  For
 example, if a student with user id "jsmith" submitted several java files:
 
     ./code2tex.py jsmith*.java > jsmith.tex
@@ -29,6 +29,12 @@ example, if a student with user id "jsmith" submitted several java files:
 This would create a PDF named `jsmith.pdf` containing the contents of all
 `jsmith*.java` files, nicely formatted with syntax highlighting and a separate
 header for each.
+
+If you have UTF-8 characters in a filename or within an included file, use
+`xelatex` in place of `pdflatex` for better unicode handling.  The output may
+look better if you have the `lmodern` package installed as well.  This should
+work for Latin characters, but non-Latin characters may still render
+incorrectly within a file listing.
 
 Wildcards and [brace
 expansion](https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html)
