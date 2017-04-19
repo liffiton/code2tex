@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import code2tex
 import os
@@ -51,15 +51,15 @@ def main():
         print("[32m{}[m".format(output_file_name))
         subprocess.call(["pdflatex", "-interaction=batchmode", output_file_name])
 
-    none_indicator = ["-----None-----"]
     print()
     print("CONVERTED FILES FOR NAMES")
-    for name, _ in matched or none_indicator:
+    for name, _ in matched or [("---None---", "")]:
         print(name)
     print()
     print("FILES NOT MATCHED")
-    for file in not_matched or none_indicator:
+    for file in not_matched or ["---None---"]:
         print(file)
+
 
 if __name__ == "__main__":
     main()

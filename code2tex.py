@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys
 import re
@@ -100,7 +100,7 @@ def makeTop(output=sys.stdout):
 }
 
 \\begin{document}
-''', file=output)  # noqa -- flake8 doesn't think this is valid; it is.
+''', file=output)
 
 
 def makeBottom(output=sys.stdout):

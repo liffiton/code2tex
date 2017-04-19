@@ -63,12 +63,12 @@ filenames constructed from Moodle and outputs PDFs named
 
 ## Dependencies
 
-The simple python script has no dependencies.
+The python scripts require Python 3 and have no other dependencies.
 
-Producing a PDF of the LaTeX output requires LaTeX, however.  Code2tex's output
-depends on a few packages that are not always included by default in a LaTeX
-install; in Ubuntu, for example, you'll need to install the following packages
-(along with their dependencies):
+Producing a PDF of the LaTeX output requires LaTeX.  Code2tex's output depends
+on a few packages that are not always included by default in a LaTeX install;
+in Ubuntu, for example, you'll need to install the following packages (along
+with their dependencies):
 
     texlive-fonts-recommended
     texlive-latex-extra
