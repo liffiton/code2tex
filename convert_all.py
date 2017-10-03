@@ -1,48 +1,57 @@
 #!/usr/bin/env python3
 
-import code2tex
-import os
 import re
 import subprocess
 import sys
+
+from collections import defaultdict
+from pathlib import Path
+
+import code2tex
 
 
 def main():
     if len(sys.argv) != 2:
         sys.exit('''Usage: %s [DIRECTORY]
- Outputs .tex file to CWD
+ Outputs .tex files and generate PDFs in CWD
  Languages (for syntax highlighting) determined from file extensions.''' % (sys.argv[0],))
 
     # Check existence of folder
-    directory = sys.argv[1]
-    if not os.path.isdir(directory):
+    directory = Path(sys.argv[1])
+    if not directory.is_dir():
         sys.exit("Directory not found: %s" % directory)
 
-    matched = []
+    matched = defaultdict(list)
     not_matched = []
 
-    pattern = re.compile(r".*/(.+?_\d+)_assignsubmission_file_(.*)$")
+    # Regexes for matching various LMS filenames
+    patterns = {}
+    patterns['Moodle'] = re.compile(r".*/(.+?_\d+)_assignsubmission_file_(.*)$")
+    patterns['Canvas'] = re.compile(r".*/(.+?_\d+)_\d+_(.*)$")
 
-    for item in os.listdir(directory):
-        item = os.path.join(directory, item)
-        # Each student's submissions are stored in a separate directory
-        if not os.path.isdir(item):
-            continue
+    # Gather all files in directory
+    files = directory.glob('**/*')
 
-        match = re.match(pattern, item)
-        if match:
-            matched.append((match.group(1), item))
+    # Match filenames against any LMS patterns, storing those that match
+    for f in files:
+        for pattern in patterns.values():
+            match = re.match(pattern, str(f))
+            if match:
+                matchinfo = (str(f), match.group(2))
+                matched[match.group(1)].append(matchinfo)
+                break
         else:
-            not_matched.append(item)
+            # triggered if end of for loop reached, break *not* used
+            not_matched.append(str(f))
 
-    for name, dir in matched:
+    # Output .tex and create PDFs for all matched files, grouped by name
+    for name in matched:
         output_file_name = (name + "_files.tex").replace(" ", "_")
         output_file = open(output_file_name, "w")
 
         code2tex.makeTop(output_file)
-        for file in os.listdir(dir):
-            full_file_path = os.path.join(dir, file)
-            code2tex.addListing(full_file_path, file, output_file)
+        for fullpath, filename in matched[name]:
+            code2tex.addListing(fullpath, filename, output_file)
         code2tex.makeBottom(output_file)
 
         output_file.close()
@@ -53,7 +62,7 @@ def main():
 
     print()
     print("CONVERTED FILES FOR NAMES")
-    for name, _ in matched or [("---None---", "")]:
+    for name in matched or ["---None---"]:
         print(name)
     print()
     print("FILES NOT MATCHED")
