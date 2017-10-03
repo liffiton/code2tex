@@ -53,13 +53,13 @@ programming languages.
 
 ### convert_all.py
 
-To quickly convert all user submissions downloaded from a [Moodle](https://moodle.org/) assignment:
- 1. Use the "Download all submissions" option in Moodle and extract the resulting zip file.
+To quickly convert all user submissions downloaded from a [Moodle](https://moodle.org/) or [Canvas](https://www.canvaslms.com/) assignment:
+ 1. Use the "Download submissions" option in a Moodle or Canvas assignment and extract the resulting zip file.
  2. run `convert_all.py <directory>` where `<directory>` is the directory with the unzipped files.
 
 The script will attempt to create PDFs from all the files. It parses the
 filenames constructed from Moodle and outputs PDFs named
-"First\_Last\_ID\_files.pdf".
+"[Name]\_[ID]\_files.pdf".
 
 ## Dependencies
 
