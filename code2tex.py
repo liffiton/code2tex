@@ -68,9 +68,9 @@ specials_re = re.compile(
 )
 
 
-def makeTop(output=sys.stdout):
+def makeTop(output=sys.stdout, show_whitespace="false"):
     # print out the file header
-    print('''
+    header = '''
 \\documentclass{article}
 \\usepackage[hmargin=1in,vmargin=1in]{geometry}
 \\usepackage{listings}
@@ -85,9 +85,9 @@ def makeTop(output=sys.stdout):
     numbers=left,                   % where to put the line-numbers
     numberstyle=\\small \\ttfamily \\color[rgb]{0.4,0.4,0.4},
                 % style used for the linenumbers
-    showspaces=false,               % show spaces adding special underscores
+    showspaces=__WHITESPACE__,               % show spaces adding special underscores
     showstringspaces=false,         % underline spaces within strings
-    showtabs=false,                 % show tabs within strings adding particular underscores
+    showtabs=__WHITESPACE__,                 % show tabs within strings adding particular underscores
     frame=lines,                    % add a frame around the code
     tabsize=4,                        % default tabsize: 4 spaces
     breaklines=true,                % automatic line breaking
@@ -100,7 +100,8 @@ def makeTop(output=sys.stdout):
 }
 
 \\begin{document}
-''', file=output)
+'''
+    print(header.replace('__WHITESPACE__', show_whitespace), file=output)
 
 
 def makeBottom(output=sys.stdout):
@@ -124,11 +125,19 @@ def addListing(filename, custom_heading=None, output=sys.stdout):
 
 def main():
     if len(sys.argv) < 2:
-        sys.exit('''Usage: %s FILE [FILE2] [FILE3] [...]
+        sys.exit('''Usage: %s [-s] FILE [FILE2] [FILE3] [...]
  Outputs .tex file to STDOUT (redirect with \"%s FILE.py > FILE.tex\")
- Languages (for syntax highlighting) determined from file extensions.''' % (sys.argv[0], sys.argv[0]))
+ Languages (for syntax highlighting) determined from file extensions.
+ If -s is given as the first argument, the resulting document will display
+ whitespace in the code as printable characters.
+ ''' % (sys.argv[0], sys.argv[0]))
 
-    files = sys.argv[1:]  # get all command line arguments
+    if sys.argv[1] == '-s':
+        show_whitespace = "true"
+        files = sys.argv[2:]  # get all other command line arguments
+    else:
+        show_whitespace = "false"
+        files = sys.argv[1:]  # get all command line arguments
 
     # Check existence of all files first
     for infile in files:
@@ -136,7 +145,7 @@ def main():
             sys.exit("File not found: %s" % infile)
 
     # Make the file (output to STDOUT)
-    makeTop()
+    makeTop(show_whitespace=show_whitespace)
     for infile in files:
         addListing(infile)
     makeBottom()
