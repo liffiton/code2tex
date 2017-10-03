@@ -26,16 +26,19 @@ def main():
 
     # Regexes for matching various LMS filenames
     patterns = {}
-    patterns['Moodle'] = re.compile(r".*/(.+?_\d+)_assignsubmission_file_(.*)$")
-    patterns['Canvas'] = re.compile(r".*/(.+?_\d+)_\d+_(.*)$")
+    patterns['Moodle'] = re.compile(r"([^/]+?_\d+)_assignsubmission_file_/(.+)$")
+    patterns['Canvas'] = re.compile(r"([^/]+?_\d+)_\d+_(.+)$")
 
     # Gather all files in directory
     files = directory.glob('**/*')
 
     # Match filenames against any LMS patterns, storing those that match
     for f in files:
+        if f.is_dir():
+            continue
+
         for pattern in patterns.values():
-            match = re.match(pattern, str(f))
+            match = re.search(pattern, str(f))
             if match:
                 matchinfo = (str(f), match.group(2))
                 matched[match.group(1)].append(matchinfo)
