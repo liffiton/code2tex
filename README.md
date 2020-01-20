@@ -13,6 +13,10 @@ documentation](http://www.texdoc.net/texmf-dist/doc/latex/listings/listings.pdf#
 syntax highlighting rules, the file will simply be included as monospaced black
 text.
 
+## Alternatives
+  * [render50](https://cs50.readthedocs.io/render50/) - Developed for Harvard's
+    CS50 course.  Solves the same problem with different tools.
+
 ## Usage / Examples
 
 Run `code2tex.py` followed by any number of filenames.  It will output the
