@@ -32,6 +32,7 @@ exts = {
     "hs" : "Haskell" ,
     "idl" : "IDL" ,
     "java" : "Java" ,
+    "js" : "JavaScript" ,
     # pde = Processing
     "pde" : "Java" ,
     "lsp" : "Lisp" ,
@@ -98,6 +99,32 @@ def makeTop(output=sys.stdout, show_whitespace="false"):
     commentstyle=\\color[rgb]{0.133,0.545,0.133},
     stringstyle=\\color[rgb]{0.627,0.126,0.941},
 }
+
+%
+% JavaScript version 1.1 by Gary Hammock
+%   https://github.com/ghammock/LaTeX_Listings_JavaScript_ES6
+%
+% Reference:
+%   B. Eich and C. Rand Mckinney, "JavaScript Language Specification
+%     (Preliminary Draft)", JavaScript 1.1.  1996-11-18.  [Online]
+%     http://hepunx.rl.ac.uk/~adye/jsspec11/titlepg2.htm
+%
+
+\\lstdefinelanguage{JavaScript}{
+  morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+    new, return, this, typeof, var, void, while, with},
+  % Literals, primitive types, and reference types.
+  morekeywords=[2]{false, null, true, boolean, number, undefined,
+    Array, Boolean, Date, Math, Number, String, Object},
+  % Built-ins.
+  morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+  sensitive,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/}, % JavaDoc style comments
+  morestring=[b]',
+  morestring=[b]"
+}[keywords, comments, strings]
 
 \\begin{document}
 '''

@@ -8,10 +8,11 @@ each file that can be marked up and returned to the students.
 Syntax highlighting is provided via the
 [listings](https://www.ctan.org/pkg/listings) LaTeX package.  Not all languages
 are currently supported; the list of included languages is in the [package
-documentation](https://texdoc.org/serve/listings/0#page=13)
-(Javascript is a notable exception).  For any language that does not have
-syntax highlighting rules, the file will simply be included as monospaced black
-text.
+documentation](https://texdoc.org/serve/listings/0#page=13) (Javascript is a
+notable exception, but I have added support for the language thanks to [Gary
+Hammock](https://github.com/ghammock/LaTeX_Listings_JavaScript_ES6)).  For any
+language that does not have syntax highlighting rules, the file will simply be
+included as monospaced black text.
 
 ## Alternatives
   * [render50](https://cs50.readthedocs.io/render50/) - Developed for Harvard's
