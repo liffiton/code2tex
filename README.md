@@ -8,7 +8,7 @@ each file that can be marked up and returned to the students.
 Syntax highlighting is provided via the
 [listings](https://www.ctan.org/pkg/listings) LaTeX package.  Not all languages
 are currently supported; the list of included languages is in the [package
-documentation](http://www.texdoc.net/texmf-dist/doc/latex/listings/listings.pdf#page=13)
+documentation](https://texdoc.org/serve/listings/0#page=13)
 (Javascript is a notable exception).  For any language that does not have
 syntax highlighting rules, the file will simply be included as monospaced black
 text.
